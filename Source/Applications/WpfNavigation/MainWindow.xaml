@@ -1,49 +1,52 @@
-﻿<Window x:Class="WpfNavigation.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Height="600"
-        Width="920"
-        WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True">
-  <Border Background="#272537"
-            CornerRadius="20">
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="200" />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="75" />
-        <RowDefinition />
-      </Grid.RowDefinitions>
-      <TextBlock Grid.Row="0"
-                 Grid.Column="0"
-                 Text="Demo"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Center"
-                 Margin="20,0,0,0"
-                 Foreground="White"
-                 FontSize="22" />
-      <StackPanel Grid.Row="1" Grid.Column="0">
-        <RadioButton Content="Home" Style="{StaticResource NavigationButton}" />
-        <RadioButton Content="Discovery" Style="{StaticResource NavigationButton}" />
-        <RadioButton Content="Featured" Style="{StaticResource NavigationButton}" />
-      </StackPanel>
-      <TextBox Grid.Row="0"
-               Grid.Column="1"
-               Style="{StaticResource SearchBox}"
-               Width="250"
-               Height="40"
-               HorizontalAlignment="Left"
-               VerticalContentAlignment="Center"
-               Margin="5" />
-      <ContentControl Grid.Row="1" Grid.Column="1" Margin="10" />
-    </Grid>
-  </Border>
+﻿<Window
+	x:Class="WpfNavigation.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:viewmodels="clr-namespace:WpfNavigation.ViewModels"
+	d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+	mc:Ignorable="d"
+	Height="600" Width="920"
+	FontFamily="Cascadia Code"
+	WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Transparent"	AllowsTransparency="True">
+	<Border Background="#272537" CornerRadius="20">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="75" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Row="0"
+				Grid.Column="0"
+				Text="Demo"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center"
+				Margin="20,0,0,0"
+				Foreground="White"
+				FontSize="22" />
+
+			<StackPanel Grid.Row="1" Grid.Column="0">
+				<RadioButton Content="Home" Style="{StaticResource NavigationButton}" Command="{Binding NavigateCommand}" CommandParameter="Home"/>
+				<RadioButton Content="Discovery" Style="{StaticResource NavigationButton}" Command="{Binding NavigateCommand}" CommandParameter="Discovery"/>
+				<RadioButton Content="Featured" Style="{StaticResource NavigationButton}" Command="{Binding NavigateCommand}" CommandParameter="Featured"/>
+			</StackPanel>
+
+			<TextBox Grid.Row="0"
+				Grid.Column="1"
+				Style="{StaticResource SearchBox}"
+				Width="250"
+				Height="40"
+				HorizontalAlignment="Left"
+				VerticalContentAlignment="Center"
+				Margin="10" />
+
+			<ContentControl Grid.Row="1" Grid.Column="1" Margin="10" Content="{Binding NavigationService.CurrentView}" />
+		</Grid>
+	</Border>
 </Window>

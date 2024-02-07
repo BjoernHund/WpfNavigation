@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
+using System.Windows;
+using WpfNavigation.ViewModels;
 
 namespace WpfNavigation
 {
@@ -10,6 +13,10 @@ namespace WpfNavigation
 		public MainWindow()
 		{
 			InitializeComponent();
+			if (!DesignerProperties.GetIsInDesignMode(this))
+			{
+				DataContext ??= App.Current.Services.GetRequiredService<MainViewModel>();
+			}
 		}
 	}
 }
